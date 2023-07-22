@@ -1,0 +1,8 @@
+---
+- name: Installing MariaDB
+  hosts:
+    - my_vm
+  gather_facts: false
+  become: true
+  roles: 
+    - mariaDB

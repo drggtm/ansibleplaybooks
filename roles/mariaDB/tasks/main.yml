@@ -1,0 +1,68 @@
+---
+- name: Install MariaDB
+  become: true
+  script: ./files/installMDB.sh
+
+# # This uses ansible.builtin.copy to copy and replace configuration file or you can do it manually.
+# - name: Change configuration file
+#   ansible.builtin.copy:
+#     src: ./templates/50-server.cnf
+#     dest: /etc/mysql/mariadb.conf.d/50-server.cnf
+#     follow: yes
+
+- name: Install Python
+  apt:
+    name:
+      - python3-pymysql
+    state: latest
+
+- name: Start MariaDB
+  service:
+    name: mariadb
+    enabled: true
+    state: started
+
+- name: Set Root Password
+  mysql_user:
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    user: root
+    check_implicit_admin: true
+    password: "{{ mysql_root_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    host: localhost
+
+# #For single user you can do 
+# - name: Create database user with  all database privileges
+#   mysql_user:
+#     name: _username_
+#     password: pass1234
+#     priv: '*.*:ALL'
+#     state: present
+
+# # For creating a single database 
+# - name: Create a new database
+#   mysql_db:
+#     name: _databse_name_
+#     state: present
+
+#This creates Multiple database at once
+- name: Create Multiple Databases
+  mysql_db:
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    name: "{{ item.name }}"
+    state: present
+  loop: "{{ db_names }}"
+
+#User created by this donot have priv. to all the databases present.
+- name: Create a users with specific priv
+  mysql_user:
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    name: "{{ item.name }}"
+    password: "{{ item.password }}"
+    priv: '{{ item.db_name }}.*:ALL,GRANT'
+    host: "{{ mysql_host }}"
+    state: present
+  loop: "{{ mariadb_users }}"

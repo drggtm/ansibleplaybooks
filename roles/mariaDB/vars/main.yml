@@ -1,0 +1,46 @@
+---
+# vars file for MariaDB
+
+mysql_root_password: "Password123"
+mysql_host: "%"
+
+db_names:
+  - { name: "school"}
+  - { name: "office"}
+  - { name: "hospital"}
+  - { name: "bank"}
+  - { name: "house"}
+
+# # Thsese user can access every database present.
+# mariadb_users:
+#   - name: school_user
+#     password: pass1234
+#   - name: office_user
+#     password: pass1234
+#   - name: hospital_user
+#     password: pass1234
+#   - name: bank_user
+#     password: pass1234
+#   - name: house_user
+#     password: pass1234
+
+
+
+#To give user with  only specific database privileges
+mariadb_users:
+  - name: school_user
+    password: pass1234
+    db_name: school
+  - name: office_user
+    password: pass1234
+    db_name: office
+  - name: hospital_user
+    password: pass1234
+    db_name: hospital
+  - name: bank_user
+    password: pass1234
+    db_name: bank
+  - name: house_user
+    password: pass1234
+    db_name: house
+

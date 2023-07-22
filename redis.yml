@@ -1,0 +1,8 @@
+---
+- name: Installing Redis
+  hosts:
+    - my_vm
+  gather_facts: false
+  become: true
+  roles: 
+    - redis

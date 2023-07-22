@@ -1,0 +1,46 @@
+    - name: Installing Elastic Search
+      script: ./files/installES.sh
+
+    - name: Reload systemd daemon
+      systemd:
+        daemon_reload: yes
+      # notify:
+      #   - Enable Elasticsearch service
+      #   - Start Elasticsearch service
+
+    - name: Enable Elasticsearch service
+      systemd:
+        name: elasticsearch.service
+        enabled: yes
+
+    - name: Start Elasticsearch service
+      systemd:
+        name: elasticsearch.service
+        state: started
+
+    - name: Update the network address
+      ansible.builtin.lineinfile:
+        path: /etc/elasticsearch/elasticsearch.yml
+        regexp: '^#network.host'
+        line: 'network.host: 0.0.0.0'
+
+    - name: Add the discovery.type line
+      ansible.builtin.lineinfile:
+        path: /etc/elasticsearch/elasticsearch.yml
+        insertafter: '^#?discovery\.seed_hosts:'
+        line: 'discovery.type: single-node'
+
+# #This commented part is  requiredfor 8.8 version
+#     - name: Disable security features
+#       ansible.builtin.lineinfile:
+#         path: /etc/elasticsearch/elasticsearch.yml
+#         regexp: '^xpack.security.enabled: true'
+#         line: 'xpack.security.enabled: false'
+
+#     - name: Disable security features
+#       ansible.builtin.lineinfile:
+#         path: /etc/elasticsearch/elasticsearch.yml
+#         regexp: '^xpack.security.enrollment.enabled: true'
+#         line: 'xpack.security.enrollment.enabled: false'
+      notify:
+        - Restart elasticsearch

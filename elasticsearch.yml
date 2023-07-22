@@ -1,0 +1,8 @@
+---
+- name: Installing elasticsearch
+  hosts:
+    - my_vm
+  gather_facts: false
+  become: true
+  roles: 
+    - elasticsearch

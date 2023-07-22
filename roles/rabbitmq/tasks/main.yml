@@ -1,0 +1,25 @@
+---
+- name: Install rabbitmq
+  become: true
+  script: ./files/rabbitmq.sh
+
+- name: Enable the rabbitmq_management plugin
+  rabbitmq_plugin:
+    names: rabbitmq_management
+    state: enabled
+
+- name: Adding user with full access control on / vhost
+  rabbitmq_user:
+    user: user_mq
+    password: pass1234
+    tags: administrator
+    vhost: /
+    configure_priv: .*
+    read_priv: .*
+    write_priv: .*
+    state: present
+
+- name: Ensure that the vhost /text  exits.
+  rabbitmq_vhost:
+    name: /test
+    state: present
