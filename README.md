@@ -31,3 +31,5 @@ This repo is used to install and configured some linux services.
 3.To install a specific service.
 $ ansible-playbook maria.yml ( this installs mariaDB). YOu can install others similarly by changing .yml filename.
 
+You also can go through Readme.md of each roles to know more about each services.
+
