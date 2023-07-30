@@ -1,18 +1,18 @@
+---
 - name: Install Redis
   apt:
     name:
       - redis-server
     state: latest
 
-# #This changes the configuration file.You can follow any of these methods. Replacing needs previously configured file stored in templates roles.
-# - name: Replace the redis config file
+# #This changes the configuration file. You can follow any of these methods. Replacing needs previously configured file stored in templates roles.
+# - name: Replace the Redis config file
 #   ansible.builtin.template:
 #     src: ./templates/_filename_.j2
 #     dest: /etc/redis/redis.conf
 
-#This uses script to update the cnf file.
+# This uses a script to update the cnf file.
 - name: Configuring Redis configuration
   script: ./files/redisconfig.sh
-    notify:
+  notify:
     - Restart redis-server
-

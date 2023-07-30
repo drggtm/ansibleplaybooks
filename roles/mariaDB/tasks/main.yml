@@ -32,21 +32,21 @@
     login_unix_socket: /var/run/mysqld/mysqld.sock
     host: localhost
 
-# #For single user you can do 
-# - name: Create database user with  all database privileges
+# #For single user you can do
+# - name: Create database user with all database privileges
 #   mysql_user:
 #     name: _username_
 #     password: pass1234
 #     priv: '*.*:ALL'
 #     state: present
 
-# # For creating a single database 
+# # For creating a single database
 # - name: Create a new database
 #   mysql_db:
 #     name: _databse_name_
 #     state: present
 
-#This creates Multiple database at once
+# This creates Multiple databases at once
 - name: Create Multiple Databases
   mysql_db:
     login_user: root
@@ -55,8 +55,8 @@
     state: present
   loop: "{{ db_names }}"
 
-#User created by this donot have priv. to all the databases present.
-- name: Create a users with specific priv
+# User created by this do not have priv. to all the databases present.
+- name: Create users with specific priv
   mysql_user:
     login_user: root
     login_password: "{{ mysql_root_password }}"
