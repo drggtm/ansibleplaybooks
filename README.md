@@ -25,6 +25,7 @@ This repo is used to install and configured some linux services.
 - Rabbitmq
 - Redis
 - Elasticsearch
+- Nginx — installs nginx and ships a templated landing page. Run with `ansible-playbook nginx.yml` or `ansible-playbook site.yml --tags nginx`. See `roles/nginx/README.md`.
 ### How to use:
 1. First edit ansible.cfg file with inventory and remote user as required.
 2. Change the hosts file with the IP address of the host where you want to install these services. You can change the group name as well. In my case it is `my_vm`. Changing the group name means you also need to change the `.yml` file with the hostname you provide in the hosts file.
