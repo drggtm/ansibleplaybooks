@@ -1,2 +1,6 @@
 ---
-# handlers file for mariaDB
+- name: Restart elasticsearch
+  service:
+    name: elasticsearch.service
+    state: restarted
+    enabled: yes
