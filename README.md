@@ -25,6 +25,7 @@ This repo is used to install and configured some linux services.
 - Rabbitmq
 - Redis
 - Elasticsearch
+- Docker — installs Docker CE from the official Docker apt repo (docker-ce, docker-ce-cli, containerd, buildx, compose) and optionally adds users to the `docker` group. Run with `ansible-playbook docker.yml` or `ansible-playbook site.yml --tags docker`. See `roles/docker/README.md`.
 ### How to use:
 1. First edit ansible.cfg file with inventory and remote user as required.
 2. Change the hosts file with the IP address of the host where you want to install these services. You can change the group name as well. In my case it is `my_vm`. Changing the group name means you also need to change the `.yml` file with the hostname you provide in the hosts file.
