@@ -33,7 +33,7 @@
     host: localhost
   no_log: true
 
-# #For single user you can do 
+# #For single user you can do
 # - name: Create database user with  all database privileges
 #   mysql_user:
 #     name: _username_
@@ -41,7 +41,7 @@
 #     priv: '*.*:ALL'
 #     state: present
 
-# # For creating a single database 
+# # For creating a single database
 # - name: Create a new database
 #   mysql_db:
 #     name: _databse_name_

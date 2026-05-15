@@ -25,7 +25,6 @@ db_names:
 #     password: pass1234
 
 
-
 #To give user with  only specific database privileges
 mariadb_users:
   - name: school_user
@@ -43,4 +42,3 @@ mariadb_users:
   - name: house_user
     password: pass1234
     db_name: house
-

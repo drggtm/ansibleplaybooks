@@ -4,5 +4,5 @@
     - my_vm
   gather_facts: false
   become: true
-  roles: 
+  roles:
     - elasticsearch

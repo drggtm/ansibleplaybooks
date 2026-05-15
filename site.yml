@@ -1,0 +1,11 @@
+---
+- name: Provision all services
+  hosts:
+    - my_vm
+  gather_facts: false
+  become: true
+  roles:
+    - { role: mariaDB, tags: ['mariadb'] }
+    - { role: redis, tags: ['redis'] }
+    - { role: rabbitmq, tags: ['rabbitmq'] }
+    - { role: elasticsearch, tags: ['elasticsearch'] }
