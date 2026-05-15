@@ -1,0 +1,8 @@
+---
+- name: Installing node_exporter
+  hosts:
+    - my_vm
+  gather_facts: false
+  become: true
+  roles:
+    - node_exporter

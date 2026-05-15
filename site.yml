@@ -9,3 +9,6 @@
     - { role: redis, tags: ['redis'] }
     - { role: rabbitmq, tags: ['rabbitmq'] }
     - { role: elasticsearch, tags: ['elasticsearch'] }
+    - { role: node_exporter, tags: ['node_exporter', 'observability'] }
+    - { role: prometheus, tags: ['prometheus', 'observability'] }
+    - { role: grafana, tags: ['grafana', 'observability'] }

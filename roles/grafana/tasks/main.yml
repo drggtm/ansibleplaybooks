@@ -1,0 +1,15 @@
+---
+- name: Install Grafana from the official apt repo
+  script: ./files/installGrafana.sh
+
+- name: Ensure grafana-server is enabled and running
+  service:
+    name: grafana-server
+    enabled: yes
+    state: started
+
+- name: Set grafana admin password via grafana-cli
+  ansible.builtin.command: >
+    grafana-cli admin reset-admin-password {{ grafana_admin_password }}
+  no_log: true
+  changed_when: false

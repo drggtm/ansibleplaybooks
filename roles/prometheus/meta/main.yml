@@ -1,0 +1,16 @@
+---
+galaxy_info:
+  author: Durga Gautam
+  description: Install and run Prometheus as a systemd service
+  license: MIT
+  min_ansible_version: "2.10"
+  platforms:
+    - name: Ubuntu
+      versions:
+        - jammy
+  galaxy_tags:
+    - monitoring
+    - prometheus
+    - metrics
+
+dependencies: []

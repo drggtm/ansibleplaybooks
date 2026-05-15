@@ -1,0 +1,17 @@
+---
+# vars file for prometheus
+prometheus_version: "2.55.1"
+prometheus_user: prometheus
+prometheus_config_dir: /etc/prometheus
+prometheus_data_dir: /var/lib/prometheus
+prometheus_listen_address: "0.0.0.0:9090"
+
+# Scrape targets baked into prometheus.yml.
+# Add to this list to pull metrics from any host running node_exporter.
+prometheus_scrape_targets:
+  - job_name: prometheus
+    targets:
+      - "localhost:9090"
+  - job_name: node_exporter
+    targets:
+      - "localhost:9100"
