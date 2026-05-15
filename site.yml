@@ -9,3 +9,4 @@
     - { role: redis, tags: ['redis'] }
     - { role: rabbitmq, tags: ['rabbitmq'] }
     - { role: elasticsearch, tags: ['elasticsearch'] }
+    - { role: nginx, tags: ['nginx'] }
