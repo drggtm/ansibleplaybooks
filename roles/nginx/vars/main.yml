@@ -1,0 +1,4 @@
+---
+# vars file for nginx
+nginx_index_title: "nginx on {{ inventory_hostname }}"
+nginx_index_message: "This server is managed by Ansible."
