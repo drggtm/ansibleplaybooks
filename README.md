@@ -25,6 +25,14 @@ This repo is used to install and configured some linux services.
 - Rabbitmq
 - Redis
 - Elasticsearch
+- Prometheus — installs Prometheus from the upstream tarball, drops a templated `prometheus.yml`, and runs it under a dedicated system user on port 9090. Run with `ansible-playbook prometheus.yml`. See `roles/prometheus/README.md`.
+- Grafana — installs Grafana OSS from the official apt repo and resets the admin password. Listens on port 3000. Run with `ansible-playbook grafana.yml`. See `roles/grafana/README.md`.
+- node_exporter — installs Prometheus' `node_exporter` (host CPU/memory/disk/network metrics) as a systemd service on port 9100. Run with `ansible-playbook node_exporter.yml`. See `roles/node_exporter/README.md`.
+
+Install the whole observability stack in one go:
+```
+$ ansible-playbook site.yml --tags observability
+```
 ### How to use:
 1. First edit ansible.cfg file with inventory and remote user as required.
 2. Change the hosts file with the IP address of the host where you want to install these services. You can change the group name as well. In my case it is `my_vm`. Changing the group name means you also need to change the `.yml` file with the hostname you provide in the hosts file.
