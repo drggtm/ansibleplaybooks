@@ -1,1 +1,3 @@
-
+---
+# vars file for redis
+redis_password: "Dw8tHZg45EahGx!"

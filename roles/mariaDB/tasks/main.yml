@@ -31,6 +31,7 @@
     password: "{{ mysql_root_password }}"
     login_unix_socket: /var/run/mysqld/mysqld.sock
     host: localhost
+  no_log: true
 
 # #For single user you can do 
 # - name: Create database user with  all database privileges
@@ -66,3 +67,4 @@
     host: "{{ mysql_host }}"
     state: present
   loop: "{{ mariadb_users }}"
+  no_log: true

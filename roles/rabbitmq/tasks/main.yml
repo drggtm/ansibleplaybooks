@@ -10,16 +10,17 @@
 
 - name: Adding user with full access control on / vhost
   rabbitmq_user:
-    user: user_mq
-    password: pass1234
+    user: "{{ rabbitmq_admin_user }}"
+    password: "{{ rabbitmq_admin_password }}"
     tags: administrator
     vhost: /
     configure_priv: .*
     read_priv: .*
     write_priv: .*
     state: present
+  no_log: true
 
-- name: Ensure that the vhost /text  exits.
+- name: Ensure that the test vhost exists
   rabbitmq_vhost:
-    name: /test
+    name: "{{ rabbitmq_test_vhost }}"
     state: present

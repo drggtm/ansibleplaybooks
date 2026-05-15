@@ -1,2 +1,5 @@
 ---
 # vars file for rabbitmq
+rabbitmq_admin_user: user_mq
+rabbitmq_admin_password: pass1234
+rabbitmq_test_vhost: /test

@@ -1,18 +1,23 @@
+---
 - name: Install Redis
   apt:
     name:
       - redis-server
     state: latest
 
-# #This changes the configuration file.You can follow any of these methods. Replacing needs previously configured file stored in templates roles.
-# - name: Replace the redis config file
-#   ansible.builtin.template:
-#     src: ./templates/_filename_.j2
-#     dest: /etc/redis/redis.conf
-
-#This uses script to update the cnf file.
-- name: Configuring Redis configuration
-  script: ./files/redisconfig.sh
+- name: Configure Redis to listen on all interfaces
+  ansible.builtin.lineinfile:
+    path: /etc/redis/redis.conf
+    regexp: '^bind '
+    line: 'bind 0.0.0.0'
   notify:
     - Restart redis-server
 
+- name: Set Redis password
+  ansible.builtin.lineinfile:
+    path: /etc/redis/redis.conf
+    regexp: '^#?\s*requirepass '
+    line: "requirepass {{ redis_password }}"
+  no_log: true
+  notify:
+    - Restart redis-server
