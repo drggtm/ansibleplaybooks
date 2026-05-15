@@ -1,0 +1,59 @@
+---
+- name: Install PostgreSQL and Python bindings
+  apt:
+    name:
+      - postgresql
+      - postgresql-contrib
+      - python3-psycopg2
+    state: latest
+    update_cache: yes
+
+- name: Ensure PostgreSQL is enabled and running
+  service:
+    name: postgresql
+    enabled: yes
+    state: started
+
+- name: Set postgres user password
+  community.postgresql.postgresql_user:
+    name: postgres
+    password: "{{ postgres_admin_password }}"
+  become: true
+  become_user: postgres
+  no_log: true
+
+- name: Allow remote password auth in pg_hba.conf
+  ansible.builtin.lineinfile:
+    path: "{{ postgres_hba_path }}"
+    regexp: '^host\s+all\s+all\s+0\.0\.0\.0/0'
+    line: "host    all             all             0.0.0.0/0               md5"
+  notify:
+    - Restart postgresql
+
+- name: Listen on all interfaces
+  ansible.builtin.lineinfile:
+    path: "{{ postgres_conf_path }}"
+    regexp: "^#?listen_addresses\\s*="
+    line: "listen_addresses = '*'"
+  notify:
+    - Restart postgresql
+
+- name: Create databases
+  community.postgresql.postgresql_db:
+    name: "{{ item.name }}"
+    state: present
+  become: true
+  become_user: postgres
+  loop: "{{ postgres_databases }}"
+
+- name: Create database users
+  community.postgresql.postgresql_user:
+    name: "{{ item.name }}"
+    password: "{{ item.password }}"
+    db: "{{ item.db_name }}"
+    priv: ALL
+    state: present
+  become: true
+  become_user: postgres
+  loop: "{{ postgres_users }}"
+  no_log: true

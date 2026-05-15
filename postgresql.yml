@@ -1,0 +1,8 @@
+---
+- name: Installing PostgreSQL
+  hosts:
+    - my_vm
+  gather_facts: false
+  become: true
+  roles:
+    - postgresql

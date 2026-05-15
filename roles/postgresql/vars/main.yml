@@ -1,0 +1,23 @@
+---
+# vars file for postgresql
+postgres_version: "14"
+postgres_conf_path: "/etc/postgresql/{{ postgres_version }}/main/postgresql.conf"
+postgres_hba_path: "/etc/postgresql/{{ postgres_version }}/main/pg_hba.conf"
+
+postgres_admin_password: "ChangeMe123"
+
+postgres_databases:
+  - { name: "school" }
+  - { name: "office" }
+  - { name: "hospital" }
+
+postgres_users:
+  - name: school_user
+    password: pass1234
+    db_name: school
+  - name: office_user
+    password: pass1234
+    db_name: office
+  - name: hospital_user
+    password: pass1234
+    db_name: hospital

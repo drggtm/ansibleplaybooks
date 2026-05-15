@@ -6,6 +6,7 @@
   become: true
   roles:
     - { role: mariaDB, tags: ['mariadb'] }
+    - { role: postgresql, tags: ['postgresql'] }
     - { role: redis, tags: ['redis'] }
     - { role: rabbitmq, tags: ['rabbitmq'] }
     - { role: elasticsearch, tags: ['elasticsearch'] }

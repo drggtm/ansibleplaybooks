@@ -1,0 +1,16 @@
+---
+galaxy_info:
+  author: Durga Gautam
+  description: Install and configure PostgreSQL on Ubuntu
+  license: MIT
+  min_ansible_version: "2.10"
+  platforms:
+    - name: Ubuntu
+      versions:
+        - jammy
+  galaxy_tags:
+    - database
+    - postgresql
+    - sql
+
+dependencies: []
