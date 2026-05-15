@@ -13,6 +13,6 @@
 #This uses script to update the cnf file.
 - name: Configuring Redis configuration
   script: ./files/redisconfig.sh
-    notify:
+  notify:
     - Restart redis-server
 
