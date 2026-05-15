@@ -5,6 +5,7 @@
   gather_facts: false
   become: true
   roles:
+    - { role: docker, tags: ['docker'] }
     - { role: mariaDB, tags: ['mariadb'] }
     - { role: redis, tags: ['redis'] }
     - { role: rabbitmq, tags: ['rabbitmq'] }

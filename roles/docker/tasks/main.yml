@@ -1,0 +1,23 @@
+---
+- name: Install Docker CE from the official repo
+  script: ./files/installDocker.sh
+
+- name: Ensure docker service is enabled and running
+  service:
+    name: docker
+    enabled: yes
+    state: started
+
+- name: Ensure containerd service is enabled and running
+  service:
+    name: containerd
+    enabled: yes
+    state: started
+
+- name: Add users to the docker group
+  ansible.builtin.user:
+    name: "{{ item }}"
+    groups: docker
+    append: yes
+  loop: "{{ docker_users }}"
+  when: docker_users | length > 0

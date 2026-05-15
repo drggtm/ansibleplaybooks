@@ -1,0 +1,5 @@
+---
+# vars file for docker
+# List of Linux users that should be allowed to run docker without sudo.
+# Leave empty to skip group membership management.
+docker_users: []
